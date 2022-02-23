@@ -1,0 +1,56 @@
+---
+title: "gk4indic_in_action"
+author: "G. Winterstein"
+date: "2021-11-30"
+output: html_document
+params:
+  tab_epci: table_supracom_2020
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(gk4indic)
+```
+
+## Bilan du traitement
+
+### Charger la table des intercommunalites
+
+```{r cogugaison, echo=FALSE}
+cree_repertoires()
+data(package = 'COGugaison') -> df
+if (all(
+  stringr::str_detect(
+    tibble::as_tibble(df$results) %>% dplyr::pull(.data$Item) %>%
+    stringr::str_subset(., 'table_supracom_(?=[:digit:]{4})'),
+    pattern = as.character(params$tab_epci)
+  ) == FALSE
+)) {
+  cat('mettre a jour COGugaison si vous etes sur que l\'annee existe')
+} else{
+  data(list = "DATA_SUPRACOM", package = "COGugaison", lib.loc = NULL)
+  ls()-> list_of_tables
+  get(list_of_tables[which(list_of_tables == params$tab_epci)])-> tab_geo
+  list_of_tables[-c(which(list_of_tables == 'params'))]->toto
+  rm(list = toto)
+  rm(list_of_tables, toto)
+  cat(paste0('Le package COGugaison est a jour, la table ', params$tab_epci,' a été chargée'))
+}
+    
+```
+
+### Transformer les tableaux
+
+```{r transforme_tab1, echo=FALSE}
+
+gk4indic::transforme_tableaux()
+```
+
+-   1ere utilisation : un message va apparaître indiquant que le tableau excel n'est pas encore dans 2_data : Copier le tableau excel, export de geokit, dans 2_data et cliquer ci-dessous sur le triangle vert en haut à droite (dans le script toto.Rmd)
+-   Seconde utilisation et suivantes le message : Les tableaux csv sont dans 4_resultats doit apparaître deux fois
+
+```{r transforme_tab2, echo=FALSE}
+gk4indic::transforme_tableaux()
+```
+
+-   Seconde utilisation et suivantes le message : Les tableaux csv sont dans 4_resultats va apparaître deux fois
