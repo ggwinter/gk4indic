@@ -1,0 +1,151 @@
+---
+title: "Comment utiliser ce package"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Comment utiliser ce package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(gk4indic)
+```
+
+## Objectif du package
+
+L'outil indicateur ODD permet la visualisation cartographique de données à partir de tableaux csv mis en forme suivant un format spécifique.
+
+gk4indic transforme le résultat de la requête geokit "Indicateurs_ecln_trim" en plusieurs tableaux csv mis en forme qui seront téléchargés dans l'outil indicateur ODD pour mise a jour de ces valeurs.
+
+## Procédure
+
+### Première utilisation uniquement
+
+#### Creer un repertoire de travail dans RStudio
+
+-   Ouvrir RStudio
+
+-   Bouton en haut à droite
+
+-   New Project
+
+-   New Directory (si nouveau) ou Existing Directory (si existant)
+
+-   New Project (de nouveau)
+
+-   Entrer le nom du projet (ce que vous voulez ex ecln_indicateurs)
+
+-   Create project
+
+#### Charger le package
+
+library('gk4indic')
+
+ou
+
+cocher la case en bas a droite dans package devant le nom gk4indic
+
+#### Ouvrir le script
+
+-   File
+
+-   New file
+
+-   Choisir RMarkdown
+
+-   une fenêtre s'ouvre
+
+    -   dans la partie gauche choisir From template
+
+    -   selectionner gk4indic_in_action
+
+    -   puis OK
+
+-   Enregistrer le fichier ex toto.Rmd
+
+-   Modifier si besoin la date de la table de liaison epci/communes appuyer sur knitr en haut à gauche
+
+#### Que va faire le script
+
+-   Faire apparaître une fenêtre de suivi du traitement
+
+    -   Charger la table de liaison entre les epci et les communes pour l'année choisie
+
+    -   Créer les 4 sous-répertoires
+
+    -   Un message va apparaître indiquant que le tableau excel n'est pas encore dans 2_data
+
+#### Ouvrir geokit et réaliser la requête Indicateurs_ecln_trim
+
+-   Exporter le résultat en xlsx : Indicateurs_ecln_trim.xlsx
+
+-   Purger les valeurs et sortir de geokit
+
+-   Coller le tableau excel dans 2_data sans changer son nom
+
+#### Relancer le script
+
+-   Cliquer sur le petit triangle vert dans la dernière case intitulée r transforme_tab2, echo=FALSE ou
+
+-   Appuyer sur knitr en haut à gauche
+
+Le script va alors transformer les tableaux après avoir vérifié si il n y a pas de valeurs manquantes (dans le cas contraire il les remplace par 0) puis modifier leur mise en forme avant de les enregistrer dans 4_resultats.
+
+#### Si tout a bien fonctionné
+
+Le message : "Les tableaux csv sont dans 4_resultats" va apparaître
+
+Ce répertoire a été créé dans vôtre projet ex : ecln_indicateurs.
+
+3 tableaux csv ont ainsi été crées :
+
+-   ECLN_PRIXM_REG_T\_202X-XX-XX.csv
+
+-   ECLN_MEV_EPCI_AG_T\_202X-XX-XX.csv
+
+-   ECLN_MEV_EPCI_AG_T\_verif_202X-XX-XX.csv
+
+Le premier tableau est mis en forme pour les régions (hors outre-mer).
+
+Le second tableau est calculé à partir de la table des communes pour les EPCI, le suivant directement à partir des EPCI (pour vérification).
+
+Seuls les tableaux 1 et 2 vont être intégrés dans l'outil indicateur.
+
+### Seconde utilisation et suivantes
+
+C'est beaucoup plus simple
+
+-   Ouvrir RStudio
+
+-   Ouvrir le projet ecln_indicateurs
+
+-   Coller le tableau excel, export de geokit, dans 2_data sans changer son nom (et donc remplacer eventuellement celui existant)
+
+-   Ouvrir le fichier toto.Rmd
+
+-   Appuyer sur knitr en haut à gauche
+
+-   Le message : Les tableaux csv sont dans 4_resultats va apparaître
+
+-   Vérifier que la date dans le nom du fichier est bien celle du jour
+
+## Ca ne marche pas
+
+### En cas de modification intempestive du fichier toto.Rmd
+
+-   Fermer le fichier
+
+-   Reprendre la procédure de Première utilisation - Ouvrir le script
+
+### Autres causes
+
+-   Les packages tidyverse, here, attempt, COGusaison doivent être installés sur le poste de travail
+
+-   tout le reste : me contacter

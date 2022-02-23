@@ -1,12 +1,36 @@
 Package: gk4indic
-Title: What the Package Does (One Line, Title Case)
+Title: Transforme tableau geokit ECLN pour import dans outil indicateurs
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Authors@R: c(
+    person("Georges", "Winterstein", email = "georges.winterstein@developpement-durable.gouv.fr", role = c("aut", "cre")),
+    person("DREAL Corse", role = "cph")
+  )
+Description: Transforme le resultat de la requete geokit "Indicateurs_ecln_trim" en plusieurs tableaux csv qui seront telecharges dans l'outil indicateur odd pour mise a jour des valeurs. 
+  Comment l'utiliser  : lire le fichier README.RMD.
+License: GPL (>= 3)
+Imports: 
+    attempt,
+    COGugaison,
+    dplyr,
+    here,
+    lubridate,
+    magrittr,
+    purrr,
+    readr,
+    readxl,
+    stats,
+    stringr,
+    tibble,
+    tidyr,
+    utf8
+Suggests: 
+    roxygen2,
+    knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder: 
+    knitr
 Encoding: UTF-8
+LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
