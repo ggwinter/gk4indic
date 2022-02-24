@@ -63,7 +63,7 @@ transforme_tab_rd1 <- function(x = "_rd1_commercialisation") {
   vector(mode = "character", length = 0) -> fich_onglets
   readxl::excel_sheets(here::here("2_data", nom_fich)) -> fich_onglets
 
-  suppressMessage(readxl::read_xls(here::here("2_data", nom_fich), "94", col_names = FALSE) -> tab1)
+  suppressMessages(readxl::read_xls(here::here("2_data", nom_fich), "94", col_names = FALSE) -> tab1)
   vector(mode = "character", length = 0) -> ...1
   tab1 %>%
     dplyr::pull(...1)  %>%
@@ -192,7 +192,7 @@ transforme_tab_rd1 <- function(x = "_rd1_commercialisation") {
   vector(mode = "character", length = 0) -> TRIM_DAY
 
 
-  suppressMessage(readxl::read_xls(
+  suppressMessages(readxl::read_xls(
     here::here("2_data", nom_fich),
     "94",
     col_names = FALSE,
