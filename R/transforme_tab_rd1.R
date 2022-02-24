@@ -63,7 +63,7 @@ transforme_tab_rd1 <- function(x = "_rd1_commercialisation") {
   vector(mode = "character", length = 0) -> fich_onglets
   readxl::excel_sheets(here::here("2_data", nom_fich)) -> fich_onglets
 
-  readxl::read_xls(here::here("2_data", nom_fich), "94", col_names = FALSE) -> tab1
+  suppressMessage(readxl::read_xls(here::here("2_data", nom_fich), "94", col_names = FALSE) -> tab1)
   vector(mode = "character", length = 0) -> ...1
   tab1 %>%
     dplyr::pull(...1)  %>%
@@ -192,7 +192,7 @@ transforme_tab_rd1 <- function(x = "_rd1_commercialisation") {
   vector(mode = "character", length = 0) -> TRIM_DAY
 
 
-  readxl::read_xls(
+  suppressMessage(readxl::read_xls(
     here::here("2_data", nom_fich),
     "94",
     col_names = FALSE,
@@ -236,7 +236,7 @@ transforme_tab_rd1 <- function(x = "_rd1_commercialisation") {
     dplyr::mutate(dplyr::across(dplyr::starts_with("DEC_T"), ~ round(.x, 2))) %>%
     dplyr::mutate(dplyr::across(c("PVMM2_T_A", "PVM_T_M"), ~ round(.x) %>%
       as.integer())) %>%
-    dplyr::select(-.data$TRIM_DAY) -> tab_rd1
+    dplyr::select(-.data$TRIM_DAY) -> tab_rd1)
 
   readr::write_csv2(tab_rd1,
     here::here(

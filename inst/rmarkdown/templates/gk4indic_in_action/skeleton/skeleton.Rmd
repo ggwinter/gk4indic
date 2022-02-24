@@ -52,8 +52,8 @@ gk4indic::transforme_tableaux()
 
 ### Transformer le tableau du SDES rd1 commercialisation
 
-```{r transforme_tabrd1, echo=FALSE}
+```{r transforme_tabrd1}
 gk4indic::transforme_tab_rd1()
 ```
 
--   Seconde utilisation et suivantes le message : Les tableaux csv sont dans 4_resultats va apparaître deux fois
+
