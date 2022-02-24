@@ -79,7 +79,7 @@ transforme_tab_rd1 <- function(x = "_rd1_commercialisation") {
       dplyr::slice(.x) %>%
       purrr::flatten_chr()
   ) %>%
-    purrr::map(.x = .data, .f =  ~ stringr::str_replace_all(.x, "[\r\n]", " ")) -> ls_champs
+    purrr::map(.f =  ~ stringr::str_replace_all(.x, "[\r\n]", " ")) -> ls_champs
 
   vector(mode = "character", length = 0) -> lgn0
   vector(mode = "character", length = 0) -> lgn1
@@ -190,7 +190,7 @@ transforme_tab_rd1 <- function(x = "_rd1_commercialisation") {
   vector(mode = "numeric", length = 0) -> RESV_T_A
   vector(mode = "numeric", length = 0) -> RESV_T_M
   vector(mode = "character", length = 0) -> TRIM_DAY
-  utils::globalVariables("where")
+
 
   readxl::read_xls(
     here::here("2_data", nom_fich),
