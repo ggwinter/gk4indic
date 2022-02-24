@@ -18,6 +18,9 @@ library(gk4indic)
 
 ```{r cogugaison, echo=FALSE}
 cree_repertoires()
+cat('Les repertoires ont été créés\n')
+
+
 data(package = 'COGugaison') -> df
 if (all(
   stringr::str_detect(
@@ -26,7 +29,7 @@ if (all(
     pattern = as.character(params$tab_epci)
   ) == FALSE
 )) {
-  cat('mettre a jour COGugaison si vous etes sur que l\'annee existe')
+  cat('mettre a jour COGugaison si vous etes sur que l\'annee existe\n')
 } else{
   data(list = "DATA_SUPRACOM", package = "COGugaison", lib.loc = NULL)
   ls()-> list_of_tables
