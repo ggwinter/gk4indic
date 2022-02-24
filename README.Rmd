@@ -26,7 +26,7 @@ gk4indic transforme le résultat de la requête geokit "Indicateurs_ecln_trim" e
 
 ## Installation
 
-vous pouvez installer la version de development de gk4indic avec la fonction suivante :
+vous pouvez installer la version de developpement de gk4indic avec la fonction suivante :
 
 ``` r
 remotes::install_github("ggwinter/gk4indic")

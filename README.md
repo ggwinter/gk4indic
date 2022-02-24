@@ -18,7 +18,7 @@ valeurs.
 
 ## Installation
 
-vous pouvez installer la version de development de gk4indic avec la
+vous pouvez installer la version de developpement de gk4indic avec la
 fonction suivante :
 
 ``` r
