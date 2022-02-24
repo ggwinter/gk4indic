@@ -39,7 +39,7 @@ if (all(
     
 ```
 
-### Transformer les tableaux
+### Transformer les tableaux de la requete geokit
 
 ```{r transforme_tab1, echo=FALSE}
 
@@ -47,10 +47,13 @@ gk4indic::transforme_tableaux()
 ```
 
 -   1ere utilisation : un message va apparaître indiquant que le tableau excel n'est pas encore dans 2_data : Copier le tableau excel, export de geokit, dans 2_data et cliquer ci-dessous sur le triangle vert en haut à droite (dans le script toto.Rmd)
--   Seconde utilisation et suivantes le message : Les tableaux csv sont dans 4_resultats doit apparaître deux fois
+-   Seconde utilisation et suivantes le message : Les tableaux csv sont dans 4_resultats doit apparaître
 
-```{r transforme_tab2, echo=FALSE}
-gk4indic::transforme_tableaux()
+
+### Transformer le tableau du SDES rd1 commercialisation
+
+```{r transforme_tabrd1, echo=FALSE}
+gk4indic::transforme_tab_rd1()
 ```
 
 -   Seconde utilisation et suivantes le message : Les tableaux csv sont dans 4_resultats va apparaître deux fois
