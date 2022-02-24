@@ -13,15 +13,18 @@ Imports:
     COGugaison,
     dplyr,
     here,
+    janitor,
     lubridate,
     magrittr,
     purrr,
     readr,
     readxl,
+    rlang,
     stats,
     stringr,
     tibble,
     tidyr,
+    tidyselect,
     utf8
 Suggests: 
     roxygen2,
