@@ -245,4 +245,5 @@ transforme_tab_rd1 <- function(x = "_rd1_commercialisation") {
     ),
     append = FALSE
   )
+  cat("Ok Le fichier rd1 est dans 4_resultats\n")
 }
