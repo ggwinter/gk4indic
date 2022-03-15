@@ -100,27 +100,28 @@ fn03_transforme_requete <- function(x = "Indicateurs_ecln_trim2022.xlsx") {
     # add a test !!!!!
 
     purrr::map(
-      names(ls_onglets),
-      ~ ls_onglets[[.x]] %>%
-        purrr::set_names(t_champs0 %>% dplyr::filter(onglet %in% .x) %>% dplyr::pull(champs)) %>%
-        dplyr::mutate(
-          "trim_day" = dplyr::case_when(
-            stringr::str_sub(dt_trimestre, 5, 5) %in% "1" ~ "03-31",
-            stringr::str_sub(dt_trimestre, 5, 5) %in% "2" ~ "06-30",
-            stringr::str_sub(dt_trimestre, 5, 5) %in% "3" ~ "09-30",
-            stringr::str_sub(dt_trimestre, 5, 5) %in% "4" ~ "12-31",
-            TRUE ~ "Pb"
-          ),
-          "dt_date" = paste(stringr::str_sub(dt_trimestre, 1, 4), trim_day, sep = "-")
-        ) %>%
-        dplyr::select(-trim_day) %>%
-        dplyr::select(
-          dplyr::starts_with("g_"),
-          dplyr::starts_with("dt_"),
-          dplyr::starts_with("mod_"),
-          dplyr::starts_with("lgt_")
-        )
-    ) %>% purrr::set_names(eff) -> ls_onglets
+    names(ls_onglets),
+    ~ ls_onglets[[.x]] %>%
+      purrr::set_names(t_champs0 %>% dplyr::filter(onglet %in% .x) %>%
+                         dplyr::pull(champs)) %>%
+      dplyr::mutate(
+        "trim_day" = dplyr::case_when(
+          stringr::str_sub(dt_trimestre, 5, 5) %in% "1" ~ "03-31",
+          stringr::str_sub(dt_trimestre, 5, 5) %in% "2" ~ "06-30",
+          stringr::str_sub(dt_trimestre, 5, 5) %in% "3" ~ "09-30",
+          stringr::str_sub(dt_trimestre, 5, 5) %in% "4" ~ "12-31",
+          TRUE ~ "Pb"
+        ),
+        "dt_date" = paste(stringr::str_sub(dt_trimestre, 1, 4), trim_day, sep = "-")
+      ) %>%
+      dplyr::select(-trim_day) %>%
+      dplyr::select(
+        dplyr::starts_with("g_"),
+        dplyr::starts_with("dt_"),
+        dplyr::starts_with("mod_"),
+        dplyr::starts_with("lgt_")
+      )
+  ) %>% purrr::set_names(eff) -> ls_onglets
 
     purrr::map(ls_onglets, ~ .x %>%
       dplyr::pull(dt_trimestre) %>%
@@ -132,6 +133,8 @@ fn03_transforme_requete <- function(x = "Indicateurs_ecln_trim2022.xlsx") {
 
 
     # Requete nombre de pièces -----
+
+    nb_pieces = vector(mode = "character", value = 0)
 
     ls_onglets$cor_pieces %>%
       dplyr::mutate(

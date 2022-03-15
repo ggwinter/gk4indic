@@ -78,7 +78,7 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
       purrr::flatten_chr()
   ) %>%
     purrr::map(., ~ stringr::str_replace_all(.x, "[\r\n]", " ")) -> ls_champs
-
+  vector(mode = "character", length = 0)-> lgn0 -> lgn1 -> lgn2
   t_champs <- dplyr::tibble(
     lgn0 = ls_champs[[1]],
     lgn1 = ls_champs[[2]],
@@ -86,6 +86,8 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
   ) %>%
     purrr::map_dfr(., ~ stringr::str_squish(.x))
 
+
+  vector(mode = "character", length = 0)-> champs -> champsp-> indic_cd
   t_champs %>%
     tidyr::fill(lgn0, lgn1) %>%
     dplyr::mutate(
@@ -206,12 +208,13 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
 
   # prix des appartements par region
   #
-  purrr::map_dfr(ls_tab2, ~ .x %>% dplyr::select(DATE, PVMM2_T_A), .id = "REG_CD") %>%
-    tidyr::pivot_wider(
-      names_from = REG_CD,
-      names_prefix = "ECLN_PRIX_REG_T\u00a7",
-      values_from = PVMM2_T_A
-    ) -> tab_reg_prix
+  vector(mode = "character", length = 0)-> REG_CD
+  vector(mode = "numeric", length = 0)-> PVMM2_T_A
+  purrr::map_dfr(ls_tab2, ~ .x %>%
+                   dplyr::select(DATE, PVMM2_T_A), .id = "REG_CD") %>%
+    tidyr::pivot_wider(names_from = REG_CD,
+                       names_prefix = "ECLN_PRIX_REG_T\u00a7",
+                       values_from = PVMM2_T_A) -> tab_reg_prix
 
   readr::write_csv(tab_reg_prix,
     here::here(
