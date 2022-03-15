@@ -8,6 +8,7 @@
 #' @importFrom stringr str_extract_all
 #' @importFrom stringr str_replace
 #' @importFrom purrr map
+#' @noRd
 #'
 fn99_utilitaire_importFrom <- function(x = 'fn06_met_en_forme_liste.R') {
 

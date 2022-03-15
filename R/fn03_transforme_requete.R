@@ -24,6 +24,8 @@
 #' @importFrom purrr set_names
 #' @importFrom purrr transpose
 #' @importFrom readr write_csv
+#' @importFrom readxl excel_sheets
+#' @importFrom readxl read_xlsx
 #' @importFrom rio export
 #' @importFrom stringr str_c
 #' @importFrom stringr str_detect
@@ -52,9 +54,9 @@ fn03_transforme_requete <- function(x = "Indicateurs_ecln_trim2022.xlsx") {
 
 
   if (file.exists(file.path(getwd(), "2_data", x))) {
-    excel_sheets(adr_fich) %>% purrr::set_names() -> fich_onglets
+    readxl::excel_sheets(adr_fich) %>% purrr::set_names() -> fich_onglets
 
-    purrr::map(fich_onglets, ~ read_xlsx(adr_fich, .x) %>%
+    purrr::map(fich_onglets, ~ readxl::read_xlsx(adr_fich, .x) %>%
       janitor::clean_names()) -> ls_onglets
 
     names(ls_onglets) -> eff
