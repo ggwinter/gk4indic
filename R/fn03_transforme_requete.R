@@ -187,47 +187,44 @@ fn03_transforme_requete <- function(x = "Indicateurs_ecln_trim2022.xlsx") {
 
     # mises en vente par EPCI ------
 
-    tab_geo <- COGugaison::table_supracom_2020
+    tab_geo <- fn01_import_tabgeo(params$tab_epci)
 
     # Sortir la fonction !!!
-    verifie_geo_manquant2 <- function(data = ls_onglets) {
-      ls_verif <- list()
-      if (exists("tab_geo") == FALSE) {
-        tab_geo <- COGugaison::table_supracom_2020
-      } # pb avec cette ligne
-
-      unique(tab_geo$CODGEO[tab_geo$REG %in% 94]) -> ls_verif$cor_com$liste
-      all(
-        purrr::map(ls_verif$cor_com$liste, ~ .x %in% data$cor_com$g_com_cd) %>% unlist() == TRUE
-      ) -> ls_verif$cor_com$valid
-
-      purrr::transpose(ls_verif) -> ls_verif
-
-      return(ls_verif)
-    }
+    # fn04_verifie_communes_manquantes <- function(data = ls_onglets) {
+    #   ls_verif <- list()
+    #
+    #   unique(tab_geo$CODGEO[tab_geo$REG %in% 94]) -> ls_verif$cor_com$liste
+    #   all(
+    #     purrr::map(ls_verif$cor_com$liste, ~ .x %in% data$cor_com$g_com_cd) %>% unlist() == TRUE
+    #   ) -> ls_verif$cor_com$valid
+    #
+    #   purrr::transpose(ls_verif) -> ls_verif
+    #
+    #   return(ls_verif)
+    # }
 
 
-    verifie_geo_manquant2() -> ls_verif
+    fn04_verifie_communes_manquantes(data = ls_onglets) -> ls_verif
 
     # Sortir la fonction !!!
-    fn_complete_table_com <- function(data = ls_onglets$cor_com) {
-      tidyr::expand_grid(
-        g_com_cd = ls_verif$liste[["cor_com"]],
-        dt_date = unique(data[["dt_date"]])
-      ) -> df0
-      if (nrow(df0) == nrow(data)) {
-        x -> result
-      } else {
-        dplyr::left_join(df0, data, by = c("g_com_cd", "dt_date")) %>%
-          dplyr::mutate_if(
-            .predicate = is.numeric,
-            .funs = ~ tidyr::replace_na(.x, 0)
-          ) -> result
-      }
-      return(result)
-    }
+    # fn_complete_table_com <- function(data = ls_onglets$cor_com) {
+    #   tidyr::expand_grid(
+    #     g_com_cd = ls_verif$liste[["cor_com"]],
+    #     dt_date = unique(data[["dt_date"]])
+    #   ) -> df0
+    #   if (nrow(df0) == nrow(data)) {
+    #     x -> result
+    #   } else {
+    #     dplyr::left_join(df0, data, by = c("g_com_cd", "dt_date")) %>%
+    #       dplyr::mutate_if(
+    #         .predicate = is.numeric,
+    #         .funs = ~ tidyr::replace_na(.x, 0)
+    #       ) -> result
+    #   }
+    #   return(result)
+    # }
 
-    fn_complete_table_com() %>%
+    fn_complete_table_com(data = ls_onglets$cor_com) %>%
       dplyr::select(g_com_cd, dt_date, lgt_mev) -> ls_onglets$cor_epci
 
 
