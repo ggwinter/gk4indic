@@ -227,7 +227,7 @@ fn03_transforme_requete <- function(x = "Indicateurs_ecln_trim2022.xlsx") {
     #   return(result)
     # }
 
-    fn_complete_table_com(data = ls_onglets$cor_com) %>%
+    fn05_complete_table_communes(data = ls_onglets$cor_com) %>%
       dplyr::select(g_com_cd, dt_date, lgt_mev) -> ls_onglets$cor_epci
 
 
