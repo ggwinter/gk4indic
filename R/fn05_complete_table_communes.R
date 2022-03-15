@@ -1,6 +1,6 @@
 #' fn05_complete_table_communes
 #'
-#' @param data
+#' @param data tibble
 #' @importFrom dplyr left_join
 #' @importFrom dplyr mutate_if
 #' @importFrom tidyr expand_grid
