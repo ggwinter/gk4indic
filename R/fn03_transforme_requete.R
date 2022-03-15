@@ -16,6 +16,7 @@
 #' @importFrom dplyr starts_with
 #' @importFrom dplyr summarise
 #' @importFrom dplyr tibble
+#' @importFrom here here
 #' @importFrom janitor clean_names
 #' @importFrom purrr flatten_chr
 #' @importFrom purrr imap
@@ -42,7 +43,7 @@
 #' @export
 fn03_transforme_requete <- function(x = "Indicateurs_ecln_trim2022.xlsx") {
 
-  # chem_dir <- here("2_data")
+  # chem_dir <- here::here("2_data")
   # fich_nom <- list.files(chem_dir, pattern = ".xlsx$") %>% str_subset("2022")
   adr_fich <- file.path(getwd(), "2_data", x)
 
@@ -78,7 +79,7 @@ fn03_transforme_requete <- function(x = "Indicateurs_ecln_trim2022.xlsx") {
     #     "mod_type"
     #   )
     # )-> t_champs
-    # write_csv(t_champs, here("3_tables", "t_champs.csv"))
+    # write_csv(t_champs, here::here("3_tables", "t_champs.csv"))
     tibble::tribble(
       ~champs0, ~champs,
       "code_de_la_commune", "g_com_cd",
@@ -184,7 +185,7 @@ fn03_transforme_requete <- function(x = "Indicateurs_ecln_trim2022.xlsx") {
       fn_extrait_tab_pieces
     ) %>% purrr::set_names(noms_tab_pieces) -> ls_pieces
 
-    purrr::iwalk(ls_pieces, ~ rio::export(.x, here("4_resultats", paste0(.y, ".csv"))))
+    purrr::iwalk(ls_pieces, ~ rio::export(.x, here::here("4_resultats", paste0(.y, ".csv"))))
 
 
     # mises en vente par EPCI ------
@@ -252,7 +253,7 @@ fn03_transforme_requete <- function(x = "Indicateurs_ecln_trim2022.xlsx") {
 
     readr::write_csv(
       ls_onglets$cor_epci,
-      here(
+      here::here(
         "4_resultats",
         paste0("ECLN_MEV_EPCI_AG_T_", Sys.Date(), ".csv")
       )

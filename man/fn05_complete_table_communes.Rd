@@ -6,6 +6,9 @@
 \usage{
 fn05_complete_table_communes(data = ls_onglets$cor_com)
 }
+\arguments{
+\item{data}{tibble}
+}
 \value{
 df
 }
