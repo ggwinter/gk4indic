@@ -136,7 +136,7 @@ fn03_transforme_requete <- function(x = "Indicateurs_ecln_trim2022.xlsx") {
 
     # Requete nombre de pièces -----
 
-    nb_pieces = vector(mode = "character", value = 0)
+    nb_pieces = vector(mode = "character", length = 0)
 
     ls_onglets$cor_pieces %>%
       dplyr::mutate(
