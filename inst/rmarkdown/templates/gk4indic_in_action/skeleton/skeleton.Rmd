@@ -51,7 +51,7 @@ fn06_table_epci()
 ```
 
 -   1ere utilisation : un message va apparaître indiquant que le tableau excel n'est pas encore dans 2_data : Copier le tableau excel, export de geokit, dans 2_data et cliquer ci-dessous sur le triangle vert en haut à droite (dans le script toto.Rmd)
--   Seconde utilisation et suivantes le message : Les tableaux csv sont dans 4_resultats doit apparaître
+-   Seconde utilisation et suivantes le message : Premiers tableaux dans 4_resultats doit apparaître
 
 
 ### Transformer le tableau du SDES rd1 commercialisation
