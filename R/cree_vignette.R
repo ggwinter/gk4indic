@@ -3,6 +3,7 @@
 #' @param x lcharactere
 #'
 #' @return nothing
+#' @noRd
 cree_vignette <- function(x = "inst/doc"){
   tools::buildVignettes(dir = ".", tangle = TRUE)
   dir.create("inst/doc")

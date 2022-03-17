@@ -22,5 +22,5 @@ vous pouvez installer la version de developpement de gk4indic avec la
 fonction suivante :
 
 ``` r
-remotes::install_github("ggwinter/gk4indic")
+remotes::install_github("ggwinter/gk4indic", build_vignettes = TRUE)
 ```
