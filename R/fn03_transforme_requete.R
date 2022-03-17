@@ -205,7 +205,7 @@ fn03_transforme_requete <- function(x = "Indicateurs_ecln_trim2022.xlsx") {
 
     cat("Premiers tableaux dans 4_resultats\n")
   } else {
-    cat("Copier le fichier xlsx dans 2_data et relancer/kniter le script\n")
+    cat("Copier le fichier xlsx de geokit dans 2_data et relancer/kniter le script\n")
   }
   return(ls_onglet)
 }
