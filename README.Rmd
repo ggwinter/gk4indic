@@ -22,7 +22,7 @@ Test de création de package et d'utilisation de github
 
 L'outil indicateur ODD permet la visualisation cartographique de données à partir de tableaux csv mis en forme suivant un format spécifique.
 
-gk4indic transforme le résultat de la requête geokit "Indicateurs_ecln_trim" en plusieurs tableaux csv mis en forme qui seront téléchargés dans l'outil indicateur ODD pour mise a jour de ces valeurs.
+gk4indic transforme le résultat de la requête geokit "Indicateurs_ecln_trim2022" et du tableau, issu du site du SDES, rd1_commercialisation en plusieurs tableaux csv mis en forme qui seront téléchargés dans l'outil indicateur ODD pour mise a jour de ces valeurs.
 
 ## Installation
 
