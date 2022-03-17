@@ -190,7 +190,7 @@ fn03_transforme_requete <- function(x = "Indicateurs_ecln_trim2022.xlsx") {
 
     # mises en vente par EPCI ------
 
-    tab_geo <- fn01_import_tabgeo(params$tab_epci)
+    # tab_geo <- fn01_import_tabgeo(params$tab_epci)
 
     # Sortir la fonction !!!
     # fn04_verifie_communes_manquantes <- function(data = ls_onglets) {
@@ -238,10 +238,10 @@ fn03_transforme_requete <- function(x = "Indicateurs_ecln_trim2022.xlsx") {
       dplyr::filter(REG %in% "94") %>%
       tibble::as_tibble() %>%
       dplyr::select(CODGEO, EPCI) %>%
-      dplyr::rename(c("g_com_cd" = "CODGEO", "g_epci_cd" = "EPCI")) -> tab_epci
+      dplyr::rename(c("g_com_cd" = "CODGEO", "g_epci_cd" = "EPCI")) -> t_epci
 
     ls_onglets$cor_epci %>%
-      dplyr::left_join(tab_epci, by = "g_com_cd") %>%
+      dplyr::left_join(t_epci, by = "g_com_cd") %>%
       dplyr::group_by(g_epci_cd, dt_date) %>%
       dplyr::summarise(lgt_mev = sum(lgt_mev)) %>%
       tidyr::pivot_wider(
