@@ -37,6 +37,6 @@ readr::write_csv(ls_onglets$cor_epci, here::here(
   paste0("ECLN_MEV_EPCI_AG_T_", Sys.Date(), ".csv")
 ))
 cat("Tous les tableaux issus de la requete geokit sont dans 4_resultats\n")
-cat("------Fin du traitement-----\n")
+
 
 }

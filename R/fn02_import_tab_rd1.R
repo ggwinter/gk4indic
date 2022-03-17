@@ -237,5 +237,7 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
     append = FALSE
   )
   cat("Tous les tableaux issus du fichier ECLN_tab_rd1 sont dans 4_resultats\n")
+  cat("\n")
+  cat("------Fin du traitement-----\n")
 }
 
