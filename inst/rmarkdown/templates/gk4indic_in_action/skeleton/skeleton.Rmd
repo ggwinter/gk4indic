@@ -44,8 +44,8 @@ cat(paste0(
 
 ```{r transforme_tab1, echo=FALSE}
 
-fn03_transforme_requete2(x = "Indicateurs_ecln_trim2022.xlsx")-> ls_onglets
-ls_verif <- fn04_verifie_communes_manquantes2(data = ls_onglets)
+fn03_transforme_requete(x = "Indicateurs_ecln_trim2022.xlsx")-> ls_onglets
+ls_verif <- fn04_verifie_communes_manquantes(data = ls_onglets)
 fn06_table_epci()
 
 ```
