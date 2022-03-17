@@ -213,7 +213,7 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
   purrr::map_dfr(ls_tab2, ~ .x %>%
                    dplyr::select(DATE, PVMM2_T_A), .id = "REG_CD") %>%
     tidyr::pivot_wider(names_from = REG_CD,
-                       names_prefix = "ECLN_PRIX_REG_T\u00a7",
+                       names_prefix = "ECLN_PRIXM_REG_T\u00a7",
                        values_from = PVMM2_T_A) -> tab_reg_prix
 
   readr::write_csv(tab_reg_prix,
@@ -236,5 +236,6 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
     ),
     append = FALSE
   )
+  cat("Tous les tableaux issus du fichier ECLN_tab_rd1 sont dans 4_resultats\n")
 }
 

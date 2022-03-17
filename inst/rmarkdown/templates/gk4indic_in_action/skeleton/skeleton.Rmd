@@ -44,7 +44,10 @@ cat(paste0(
 
 ```{r transforme_tab1, echo=FALSE}
 
-gk4indic::fn03_transforme_requete()
+fn03_transforme_requete2(x = "Indicateurs_ecln_trim2022.xlsx")-> ls_onglets
+ls_verif <- fn04_verifie_communes_manquantes2(data = ls_onglets)
+fn06_table_epci()
+
 ```
 
 -   1ere utilisation : un message va apparaître indiquant que le tableau excel n'est pas encore dans 2_data : Copier le tableau excel, export de geokit, dans 2_data et cliquer ci-dessous sur le triangle vert en haut à droite (dans le script toto.Rmd)

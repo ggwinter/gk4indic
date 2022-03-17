@@ -80,6 +80,7 @@ fn03_transforme_requete <- function(x = "Indicateurs_ecln_trim2022.xlsx") {
     #   )
     # )-> t_champs
     # write_csv(t_champs, here::here("3_tables", "t_champs.csv"))
+
     tibble::tribble(
       ~champs0, ~champs,
       "code_de_la_commune", "g_com_cd",
@@ -188,76 +189,7 @@ fn03_transforme_requete <- function(x = "Indicateurs_ecln_trim2022.xlsx") {
     purrr::iwalk(ls_pieces, ~ rio::export(.x, here::here("4_resultats", paste0(.y, ".csv"))))
 
 
-    # mises en vente par EPCI ------
 
-    # tab_geo <- fn01_import_tabgeo(params$tab_epci)
-
-    # Sortir la fonction !!!
-    # fn04_verifie_communes_manquantes <- function(data = ls_onglets) {
-    #   ls_verif <- list()
-    #
-    #   unique(tab_geo$CODGEO[tab_geo$REG %in% 94]) -> ls_verif$cor_com$liste
-    #   all(
-    #     purrr::map(ls_verif$cor_com$liste, ~ .x %in% data$cor_com$g_com_cd) %>% unlist() == TRUE
-    #   ) -> ls_verif$cor_com$valid
-    #
-    #   purrr::transpose(ls_verif) -> ls_verif
-    #
-    #   return(ls_verif)
-    # }
-
-
-    fn04_verifie_communes_manquantes(data = ls_onglets) -> ls_verif
-
-    # Sortir la fonction !!!
-    # fn_complete_table_com <- function(data = ls_onglets$cor_com) {
-    #   tidyr::expand_grid(
-    #     g_com_cd = ls_verif$liste[["cor_com"]],
-    #     dt_date = unique(data[["dt_date"]])
-    #   ) -> df0
-    #   if (nrow(df0) == nrow(data)) {
-    #     x -> result
-    #   } else {
-    #     dplyr::left_join(df0, data, by = c("g_com_cd", "dt_date")) %>%
-    #       dplyr::mutate_if(
-    #         .predicate = is.numeric,
-    #         .funs = ~ tidyr::replace_na(.x, 0)
-    #       ) -> result
-    #   }
-    #   return(result)
-    # }
-
-    fn05_complete_table_communes(data = ls_onglets$cor_com) %>%
-      dplyr::select(g_com_cd, dt_date, lgt_mev) -> ls_onglets$cor_epci
-
-
-    # regroupement des communes par EPCI
-    #
-
-    tab_geo %>%
-      dplyr::filter(REG %in% "94") %>%
-      tibble::as_tibble() %>%
-      dplyr::select(CODGEO, EPCI) %>%
-      dplyr::rename(c("g_com_cd" = "CODGEO", "g_epci_cd" = "EPCI")) -> t_epci
-
-    ls_onglets$cor_epci %>%
-      dplyr::left_join(t_epci, by = "g_com_cd") %>%
-      dplyr::group_by(g_epci_cd, dt_date) %>%
-      dplyr::summarise(lgt_mev = sum(lgt_mev)) %>%
-      tidyr::pivot_wider(
-        names_from = g_epci_cd,
-        names_prefix = "ECLN_MEV_EPCI_AG_T\u00a7",
-        values_from = lgt_mev
-      ) %>%
-      dplyr::rename(c("date" = "dt_date")) -> ls_onglets$cor_epci
-
-    readr::write_csv(
-      ls_onglets$cor_epci,
-      here::here(
-        "4_resultats",
-        paste0("ECLN_MEV_EPCI_AG_T_", Sys.Date(), ".csv")
-      )
-    )
 
     ls_onglets$reg_coll %>%
       dplyr::filter(stringr::str_detect(mod_type, "Collectif")) %>%
@@ -271,8 +203,8 @@ fn03_transforme_requete <- function(x = "Indicateurs_ecln_trim2022.xlsx") {
       dplyr::rename(c("date" = "dt_date")) -> tab_reg_prix_appart
 
 
-    print("Les fichiers sont dans 4_resultats\n")
+    cat("Premiers tableaux dans 4_resultats\n")
   } else {
-    print("Copier le fichier xlsx dans 2_data et relancer/kniter le script\n")
+    cat("Copier le fichier xlsx dans 2_data et relancer/kniter le script\n")
   }
 }
