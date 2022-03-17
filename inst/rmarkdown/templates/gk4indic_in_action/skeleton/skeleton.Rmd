@@ -16,7 +16,7 @@ library(gk4indic)
 
 ### Charger la table des intercommunalites
 
-```{r}
+```{r, echo=FALSE}
 cree_repertoires()
 cat('Les repertoires ont été créés\n')
 
