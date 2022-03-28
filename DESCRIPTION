@@ -1,6 +1,6 @@
 Package: gk4indic
 Title: Transforme tableau geokit ECLN pour import dans outil indicateurs
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: c(
     person("Georges", "Winterstein", email = "georges.winterstein@developpement-durable.gouv.fr", role = c("aut", "cre")),
     person("DREAL Corse", role = "cph")
