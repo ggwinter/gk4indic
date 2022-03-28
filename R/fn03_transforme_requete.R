@@ -3,6 +3,10 @@
 #' @param x le nom du fichier issu de geokit
 #'
 #' @importFrom attempt attempt
+#' @importFrom cli bg_green
+#' @importFrom cli bg_red
+#' @importFrom cli col_black
+#' @importFrom cli col_yellow
 #' @importFrom dplyr case_when
 #' @importFrom dplyr filter
 #' @importFrom dplyr group_by
@@ -46,8 +50,10 @@ fn03_transforme_requete <-
     adr_fich <- file.path(getwd(), "2_data", x)
 
 
-    attempt::attempt(file.exists(adr_fich) == FALSE, msg = utf8::as_utf8(paste0("Le fichier ",
-                                                                                x, "n'est pas dans 2_data")))
+    attempt::attempt(file.exists(adr_fich) == FALSE,
+                     msg = cli::bg_red(cli::col_yellow(utf8::as_utf8(
+                       paste0("Le fichier ", x, "n'est pas dans 2_data")
+                     ))))
     if (file.exists(file.path(getwd(), "2_data", x))) {
       fich_onglets <- readxl::excel_sheets(adr_fich) %>%
         purrr::set_names()
@@ -205,10 +211,19 @@ fn03_transforme_requete <-
           names_prefix = "ECLN_PRIXM_REG_T§",
           values_from = prix
         ) %>% dplyr::rename(c(date = "dt_date"))
-      cat("Les fichiers sont dans 4_resultats\n")
+      cat(cli::bg_green(
+        cli::col_black(
+          "Les premiers fichiers issu de la requete geokit sont dans 4_resultats\n"
+        )
+      ))
+      return(ls_onglets)
     }
     else {
-      cat("Copier le fichier xlsx dans 2_data et relancer/kniter le script\n")
+      cat(cli::bg_red(
+        cli::col_yellow(
+          "Copier le fichier xlsx dans 2_data et relancer/kniter le script\n"
+        )
+      ))
     }
-    return(ls_onglets)
+    return(NA)
   }

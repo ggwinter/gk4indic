@@ -3,12 +3,18 @@
 #' @param dossier le repertoire où est le projet
 #'
 #' @return cree les sous-repertoires
+#' @importFrom here here
+#' @importFrom cli bg_green
+#' @importFrom cli col_black
 #' @importFrom purrr walk
 #' @export
 cree_repertoires <- function(dossier = here::here()) {
-  repertoires <- c("1_scripts", "2_data", "3_tables", "4_resultats")
-  purrr::walk(repertoires, ~ if (dir.exists(here::here(dossier, .x)) == FALSE)
+  repertoires <- c("1_scripts", "2_data", "3_tables",
+                   "4_resultats", "5_publications")
+  purrr::walk(repertoires, ~if (dir.exists(here::here(dossier,
+                                                      .x)) == FALSE)
     dir.create(here::here(dossier, .x)))
+  return(cat(cli::bg_green(cli::col_black('Les repertoires ont été créés\n'))))
 
 }
 

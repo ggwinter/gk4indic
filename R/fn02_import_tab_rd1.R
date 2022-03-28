@@ -2,6 +2,11 @@
 #'
 #' @param x le nom du repertoire ou est le fichier
 #' @importFrom attempt stop_if_not
+#' @importFrom cli bg_green
+#' @importFrom cli bg_red
+#' @importFrom cli col_black
+#' @importFrom cli col_yellow
+#' @importFrom cli rule
 #' @importFrom dplyr across
 #' @importFrom dplyr all_of
 #' @importFrom dplyr case_when
@@ -38,22 +43,25 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
 
   # teste la presence du fichier dans 2_data ou les doublons
   #
-  attempt::stop_if_not(
-    .x = length(nom_fich),
-    .p = ~ .x < 2,
-    msg = "PB : il y a plusieurs fichiers rd1 dans 2_data\n"
-  )
-  attempt::stop_if_not(
-    .x = length(nom_fich),
-    .p = ~ .x > 0,
-    msg = "Pb : il n'y a pas de fichier rd1 dans 2_data\n"
-  )
+  attempt::stop_if_not(.x = length(nom_fich),
+                       .p = ~ .x < 2,
+                       msg = cli::bg_red(cli::col_yellow("PB : il y a plusieurs fichiers rd1 dans 2_data\n")))
+
+  attempt::stop_if_not(.x = length(nom_fich),
+                       .p = ~ .x > 0,
+                       msg = cli::bg_red(cli::col_yellow("Pb : il n'y a pas de fichier rd1 dans 2_data\n")))
 
   # dernier trimestre du tableau
   #
   fich_rd1_trim <- stringr::str_extract(nom_fich, "[:digit:]{4}t[:digit:]")
 
-  cat(stringr::str_c("Le fichier rd1 du trimestre ", fich_rd1_trim, " va \u00eatre import\u00e9\n"))
+  cat(cli::bg_green(cli::col_black(
+    stringr::str_c(
+      "Le fichier rd1 du trimestre ",
+      fich_rd1_trim,
+      " va \u00eatre import\u00e9\n"
+    )
+  )))
 
   # teste l ouverture du fichier notamment les lignes vides avant le tableau
 
@@ -127,12 +135,20 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
   # verification que la structure du fichier n a pas chang\u00e9e nombre et nom des colonnes
 
   attempt::stop_if_not(
-    .x = length(which(!t_champs %>% dplyr::pull(champsp) %in% t_champs_valides$champsp)),
+    .x = length(
+      which(
+        !t_champs %>% dplyr::pull(champsp) %in% t_champs_valides$champsp
+      )
+    ),
     .p = ~ .x == 0,
-    msg = "Pb : la structure du fichier rd1 a chang\u00e9\n"
+    msg = cli::bg_red(
+      cli::col_yellow("Pb : la structure du fichier rd1 a chang\u00e9\n")
+    )
   )
 
-  cat("Ok : La structure du fichier rd1 est inchang\u00e9e\n")
+  cat(cli::bg_green(
+    cli::col_black("Ok : La structure du fichier rd1 est inchang\u00e9e\n")
+  ))
 
   t_champs_valides %>%
     dplyr::filter(stats::complete.cases(indic_cd)) -> t_champs_valides
@@ -236,8 +252,15 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
     ),
     append = FALSE
   )
-  cat("Tous les tableaux issus du fichier ECLN_tab_rd1 sont dans 4_resultats\n")
-  cat("\n")
-  cat("------Fin du traitement-----\n")
+  cat(
+    cli::rule(line = 2),
+    cli::bg_green(
+      cli::col_black(
+        "\nTous les tableaux issus du fichier ECLN_tab_rd1 sont dans 4_resultats"
+      )
+    ),
+    cli::bg_green(cli::col_black("\n------Fin du traitement-----\n")),
+    cli::rule(line = 2)
+  )
 }
 

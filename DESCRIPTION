@@ -10,6 +10,7 @@ Description: Transforme le resultat de la requete geokit "Indicateurs_ecln_trim"
 License: GPL (>= 3)
 Imports: 
     attempt,
+    cli,
     COGugaison,
     dplyr,
     here,

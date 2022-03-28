@@ -1,6 +1,8 @@
 #' fn06_table_epci
 #'
 #' @param data list
+#' @importFrom cli bg_green
+#' @importFrom cli col_black
 #' @importFrom dplyr filter
 #' @importFrom dplyr group_by
 #' @importFrom dplyr left_join
@@ -36,7 +38,11 @@ readr::write_csv(ls_onglets$cor_epci, here::here(
   "4_resultats",
   paste0("ECLN_MEV_EPCI_AG_T_", Sys.Date(), ".csv")
 ))
-cat("Tous les tableaux issus de la requete geokit sont dans 4_resultats\n")
+cat(cli::bg_green(
+  cli::col_black(
+    "Tous les tableaux issus de la requete geokit sont dans 4_resultats\n"
+  )
+))
 
 
 }

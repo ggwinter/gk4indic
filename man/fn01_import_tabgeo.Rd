@@ -4,7 +4,7 @@
 \alias{fn01_import_tabgeo}
 \title{fn01_import_tabgeo}
 \usage{
-fn01_import_tabgeo(x = "table_supracom_2020")
+fn01_import_tabgeo(x = params$tab_epci)
 }
 \arguments{
 \item{x}{nom de la table}
