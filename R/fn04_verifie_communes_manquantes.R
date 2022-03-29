@@ -18,7 +18,7 @@ fn04_verifie_communes_manquantes <- function(data = ls_onglets) {
   else{
     ls_verif$cor_com$valid <- NA
     ls_verif$cor_com$liste <- NA_character_
-    message(cli::bg_red(cli::col_yellow("la table tab_geo n'a pas été chargée")))
+    message(cli::bg_red(cli::col_yellow("la table tab_geo n\u0027a pas \u00e9t\u00e9 charg\u00e9e")))
   }
   ls_verif <- purrr::transpose(ls_verif)
   return(ls_verif)

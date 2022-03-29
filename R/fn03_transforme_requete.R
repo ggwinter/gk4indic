@@ -52,7 +52,7 @@ fn03_transforme_requete <-
 
     attempt::attempt(file.exists(adr_fich) == FALSE,
                      msg = cli::bg_red(cli::col_yellow(utf8::as_utf8(
-                       paste0("Le fichier ", x, "n'est pas dans 2_data")
+                       paste0("Le fichier ", x, "n\u0027est pas dans 2_data")
                      ))))
     if (file.exists(file.path(getwd(), "2_data", x))) {
       fich_onglets <- readxl::excel_sheets(adr_fich) %>%
@@ -208,12 +208,12 @@ fn03_transforme_requete <-
                                    0)) %>% dplyr::select(dt_date, g_reg_cd, prix) %>%
         tidyr::pivot_wider(
           names_from = g_reg_cd,
-          names_prefix = "ECLN_PRIXM_REG_T§",
+          names_prefix = "ECLN_PRIXM_REG_T\u00a7",
           values_from = prix
         ) %>% dplyr::rename(c(date = "dt_date"))
       cat(cli::bg_green(
         cli::col_black(
-          "Les premiers fichiers issu de la requete geokit sont dans 4_resultats\n"
+          "Les premiers fichiers issus de la requete geokit sont dans 4_resultats\n"
         )
       ))
       return(ls_onglets)
@@ -221,7 +221,7 @@ fn03_transforme_requete <-
     else {
       cat(cli::bg_red(
         cli::col_yellow(
-          "Copier le fichier xlsx dans 2_data et relancer/kniter le script\n"
+          "Copier le fichier xlsx dans 2_data et relancer_kniter le script\n"
         )
       ))
     }

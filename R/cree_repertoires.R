@@ -14,7 +14,7 @@ cree_repertoires <- function(dossier = here::here()) {
   purrr::walk(repertoires, ~if (dir.exists(here::here(dossier,
                                                       .x)) == FALSE)
     dir.create(here::here(dossier, .x)))
-  return(cat(cli::bg_green(cli::col_black('Les repertoires ont été créés\n'))))
+  return(cat(cli::bg_green(cli::col_black('Les repertoires ont \u00e9t\u00e9 cr\u00e9\u00e9s\n'))))
 
 }
 

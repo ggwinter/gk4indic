@@ -36,7 +36,11 @@ Vérifier que vous avez installé la librairie remotes
 
 puis taper dans la console :
 
-" remotes::install_github('ggwinter/gk4indic", build_vignettes = TRUE) "
+remotes::install_github('ggwinter/gk4indic", build_vignettes = TRUE)
+
+installer le package COGugaison
+
+remotes::install_github('antuki/COGugaison", build_vignettes = TRUE)
 
 une fois que c'est fait redemmarer la session R ctrl+shift+f10
 
@@ -90,7 +94,7 @@ cocher la case en bas a droite dans package devant le nom gk4indic
 
     -   Charger la table de liaison entre les epci et les communes pour l'année choisie
 
-    -   Créer les 4 sous-répertoires
+    -   Créer les 5 sous-répertoires
 
     -   et s'arrêter : un message va apparaître indiquant que le tableau excel n'est pas encore dans 2_data
 
@@ -116,7 +120,7 @@ Le script va alors transformer les tableaux après avoir vérifié pour les comm
 
 #### Si tout a bien fonctionné
 
-Le message : "Premiers tableaux dans 4_resultats" va apparaître. Ce répertoire a été créé dans votre projet ex : ecln_indicateurs.
+Le message final : "Fin du traitement" va apparaître. Les tableaux sont dans 4_resultats", ce répertoire a été créé dans votre projet ex : ecln_indicateurs.
 
 5 tableaux csv ont ainsi été crées :
 
@@ -158,6 +162,6 @@ C'est beaucoup plus simple
 
 ### Autres causes
 
--   Les packages tidyverse, here, attempt, rio, COGusaison doivent être installés sur le poste de travail
+-   Les packages tidyverse, here, attempt, rio, COGusaison doivent être installés sur le poste de travail, à vérifier dans la liste des packages. 
 
 -   tout le reste : me contacter

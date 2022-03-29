@@ -8,35 +8,25 @@ params:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 library(gk4indic)
 ```
 
 ## Bilan du traitement
 
+4 etapes successives
+
 ### Charger la table des intercommunalites
 
-```{r, echo=FALSE}
+```{r repertoires, echo=FALSE}
 cree_repertoires()
-cat('Les repertoires ont été créés\n')
-
 ```
-
-
-
 
 ### Charger la table des intercommunalites
 
 ```{r cogugaison, echo=FALSE}
 
-
 fn01_import_tabgeo() -> tab_geo
-cat(paste0(
-  'Le package COGugaison est a jour, la table ',
-  params$tab_epci,
-  ' a été chargée'
-))
-
 
 ```
 
@@ -50,13 +40,13 @@ fn06_table_epci()
 
 ```
 
--   1ere utilisation : un message va apparaître indiquant que le tableau excel n'est pas encore dans 2_data : Copier le tableau excel, export de geokit, dans 2_data et cliquer ci-dessous sur le triangle vert en haut à droite (dans le script toto.Rmd)
--   Seconde utilisation et suivantes le message : Premiers tableaux dans 4_resultats doit apparaître
+-   1ere utilisation : un message va apparaitre indiquant que le tableau excel n'est pas encore dans 2_data : Copier les tableau excel, export de geokit et SDES, dans 2_data et cliquer sur knitr en haut à gauche 
+-   Seconde utilisation et suivantes deux messages doivent apparaitre : Les premiers fichiers..., Tous les tableaux sont dans 4 résultats.
 
 
 ### Transformer le tableau du SDES rd1 commercialisation
 
-```{r transforme_tabrd1}
+```{r transforme_tabrd1, message=FALSE}
 
 gk4indic::fn02_import_tab_rd1()
 
