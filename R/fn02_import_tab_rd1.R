@@ -9,6 +9,7 @@
 #' @importFrom cli rule
 #' @importFrom dplyr across
 #' @importFrom dplyr all_of
+#' @importFrom dplyr arrange
 #' @importFrom dplyr case_when
 #' @importFrom dplyr filter
 #' @importFrom dplyr mutate
@@ -22,7 +23,7 @@
 #' @importFrom purrr flatten_chr
 #' @importFrom purrr map_dfr
 #' @importFrom purrr set_names
-#' @importFrom readr write_csv
+#' @importFrom readr write_csv2
 #' @importFrom readxl excel_sheets
 #' @importFrom readxl read_xls
 #' @importFrom stats complete.cases
@@ -230,9 +231,10 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
                    dplyr::select(Date, PVMM2_T_A), .id = "REG_CD") %>%
     tidyr::pivot_wider(names_from = REG_CD,
                        names_prefix = "ECLN_PRIXM_REG_T\u00a7",
-                       values_from = PVMM2_T_A) -> tab_reg_prix
+                       values_from = PVMM2_T_A) %>%
+    dplyr::arrange(desc(Date)) -> tab_reg_prix
 
-  readr::write_csv(tab_reg_prix,
+  readr::write_csv2(tab_reg_prix,
     here::here(
       "4_resultats",
       paste0("ECLN_PRIXM_REG_T_", fich_rd1_trim, "_", Sys.Date(), ".csv")
@@ -243,7 +245,7 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
   # tableau RD1 mis en forme pour importation
   #
 
-  ls_tab2[["94"]] %>% select(Date, MEV_T_A,
+  ls_tab2[["94"]] %>% dplyr::select(Date, MEV_T_A,
                              MEV_T_M,
                              RESV_T_A,
                              RESV_T_M,
@@ -252,9 +254,10 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
                              ECLN_MEV_AG_T_A,
                              ECLN_MEV_AG_T_M,
                              ECLN_RESV_AG_T_A,
-                             ECLN_RESV_AG_T_M) -> tab_cor
+                             ECLN_RESV_AG_T_M) %>%
+    dplyr::arrange(desc(Date))-> tab_cor
 
-  readr::write_csv(tab_cor,
+  readr::write_csv2(tab_cor,
     here::here(
       "4_resultats",
       paste0("ECLN_tab_rd1_", fich_rd1_trim, "_", Sys.Date(), ".csv")

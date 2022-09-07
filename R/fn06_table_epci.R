@@ -3,6 +3,7 @@
 #' @param data list
 #' @importFrom cli bg_green
 #' @importFrom cli col_black
+#' @importFrom dplyr arrange
 #' @importFrom dplyr filter
 #' @importFrom dplyr group_by
 #' @importFrom dplyr left_join
@@ -10,7 +11,7 @@
 #' @importFrom dplyr select
 #' @importFrom dplyr summarise
 #' @importFrom here here
-#' @importFrom readr write_csv
+#' @importFrom readr write_csv2
 #' @importFrom tibble as_tibble
 #' @importFrom tidyr pivot_wider
 #' @return nothing
@@ -32,9 +33,11 @@ ls_onglets$cor_epci <-
   dplyr::summarise(lgt_mev = sum(lgt_mev)) %>%
   tidyr::pivot_wider(names_from = g_epci_cd,
                      names_prefix = "ECLN_MEV_EPCI_AG_T\u00a7",
-                     values_from = lgt_mev) %>% dplyr::rename(c("Date" = "dt_date"))
+                     values_from = lgt_mev) %>%
+  dplyr::rename(c("Date" = "dt_date")) %>%
+  dplyr::arrange(desc(Date))
 
-readr::write_csv(ls_onglets$cor_epci, here::here(
+readr::write_csv2(ls_onglets$cor_epci, here::here(
   "4_resultats",
   paste0("ECLN_MEV_EPCI_AG_T_", Sys.Date(), ".csv")
 ))

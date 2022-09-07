@@ -7,6 +7,7 @@
 #' @importFrom cli bg_red
 #' @importFrom cli col_black
 #' @importFrom cli col_yellow
+#' @importFrom dplyr arrange
 #' @importFrom dplyr case_when
 #' @importFrom dplyr filter
 #' @importFrom dplyr group_by
@@ -28,10 +29,9 @@
 #' @importFrom purrr map_dfr
 #' @importFrom purrr set_names
 #' @importFrom purrr transpose
-#' @importFrom readr write_csv
+#' @importFrom readr write_csv2
 #' @importFrom readxl excel_sheets
 #' @importFrom readxl read_xlsx
-#' @importFrom rio export
 #' @importFrom stringr str_c
 #' @importFrom stringr str_detect
 #' @importFrom stringr str_sub
@@ -175,7 +175,7 @@ fn03_transforme_requete <-
                                                            ) %>% dplyr::select(dt_trimestre,
                                                                                dplyr::starts_with("nb_"), dt_date) %>%
           dplyr::rename(c("trimestre" = "dt_trimestre",
-                          "Date" = "dt_date"))
+                          "Date" = "dt_date")) %>% dplyr::arrange(desc(Date))
         return(df_pieces)
       }
 
@@ -195,7 +195,7 @@ fn03_transforme_requete <-
                                  purrr::set_names(c("nb_lgt_", "nb_resa_")),
                                fn_extrait_tab_pieces) %>% purrr::set_names(noms_tab_pieces)
 
-      purrr::iwalk(ls_pieces, ~ rio::export(.x, here::here("4_resultats",
+      purrr::iwalk(ls_pieces, ~ readr::write_csv2(.x, here::here("4_resultats",
                                                            paste0(.y, ".csv"))))
 
 
@@ -210,7 +210,8 @@ fn03_transforme_requete <-
           names_from = g_reg_cd,
           names_prefix = "ECLN_PRIXM_REG_T\u00a7",
           values_from = prix
-        ) %>% dplyr::rename(c("Date" = "dt_date"))
+        ) %>% dplyr::rename(c("Date" = "dt_date")) %>% dplyr::arrange(desc(Date))
+
       cat(cli::bg_green(
         cli::col_black(
           "Les premiers fichiers issus de la requete geokit sont dans 4_resultats\n"
