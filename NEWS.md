@@ -1,3 +1,7 @@
+# gk4indic 0.2.0
+
+* Modification des formats de sortie des tables separateur point virgule
+
 # gk4indic 0.1.0
 
 * Modification des fonctions.
