@@ -32,7 +32,7 @@ ls_onglets$cor_epci <-
   dplyr::summarise(lgt_mev = sum(lgt_mev)) %>%
   tidyr::pivot_wider(names_from = g_epci_cd,
                      names_prefix = "ECLN_MEV_EPCI_AG_T\u00a7",
-                     values_from = lgt_mev) %>% dplyr::rename(c(date = "dt_date"))
+                     values_from = lgt_mev) %>% dplyr::rename(c("Date" = "dt_date"))
 
 readr::write_csv(ls_onglets$cor_epci, here::here(
   "4_resultats",

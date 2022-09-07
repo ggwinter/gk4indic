@@ -174,8 +174,8 @@ fn03_transforme_requete <-
                                                              values_from = valeur
                                                            ) %>% dplyr::select(dt_trimestre,
                                                                                dplyr::starts_with("nb_"), dt_date) %>%
-          dplyr::rename(c(trimestre = "dt_trimestre",
-                          date = "dt_date"))
+          dplyr::rename(c("trimestre" = "dt_trimestre",
+                          "Date" = "dt_date"))
         return(df_pieces)
       }
 
@@ -210,7 +210,7 @@ fn03_transforme_requete <-
           names_from = g_reg_cd,
           names_prefix = "ECLN_PRIXM_REG_T\u00a7",
           values_from = prix
-        ) %>% dplyr::rename(c(date = "dt_date"))
+        ) %>% dplyr::rename(c("Date" = "dt_date"))
       cat(cli::bg_green(
         cli::col_black(
           "Les premiers fichiers issus de la requete geokit sont dans 4_resultats\n"

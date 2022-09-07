@@ -194,7 +194,7 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
           stringr::str_detect(TRIMESTRE, "T4") ~ "12-31",
           TRUE ~ "Pb"
         ),
-        "DATE" = paste(ANNEE, TRIM_DAY, sep = "-")
+        "Date" = paste(ANNEE, TRIM_DAY, sep = "-")
       ) %>%
       dplyr::mutate(dplyr::across(where(is.numeric), ~ tidyr::replace_na(.x, 0))) %>%
       dplyr::mutate(dplyr::across(
@@ -227,7 +227,7 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
   vector(mode = "character", length = 0)-> REG_CD
   vector(mode = "numeric", length = 0)-> PVMM2_T_A
   purrr::map_dfr(ls_tab2, ~ .x %>%
-                   dplyr::select(DATE, PVMM2_T_A), .id = "REG_CD") %>%
+                   dplyr::select(Date, PVMM2_T_A), .id = "REG_CD") %>%
     tidyr::pivot_wider(names_from = REG_CD,
                        names_prefix = "ECLN_PRIXM_REG_T\u00a7",
                        values_from = PVMM2_T_A) -> tab_reg_prix
@@ -243,7 +243,16 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
   # tableau RD1 mis en forme pour importation
   #
 
-  ls_tab2[["94"]] -> tab_cor
+  ls_tab2[["94"]] %>% select(Date, MEV_T_A,
+                             MEV_T_M,
+                             RESV_T_A,
+                             RESV_T_M,
+                             ENC_T_A,
+                             ENC_T_M,
+                             ECLN_MEV_AG_T_A,
+                             ECLN_MEV_AG_T_M,
+                             ECLN_RESV_AG_T_A,
+                             ECLN_RESV_AG_T_M) -> tab_cor
 
   readr::write_csv(tab_cor,
     here::here(
