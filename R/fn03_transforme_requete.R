@@ -172,10 +172,9 @@ fn03_transforme_requete <-
                                                              names_from = nb_pieces,
                                                              names_prefix = y,
                                                              values_from = valeur
-                                                           ) %>% dplyr::select(dt_trimestre,
-                                                                               dplyr::starts_with("nb_"), dt_date) %>%
-          dplyr::rename(c("trimestre" = "dt_trimestre",
-                          "Date" = "dt_date")) %>% dplyr::arrange(desc(Date))
+                                                           ) %>% dplyr::select(dt_date,
+                                                                               dplyr::starts_with("nb_")) %>%
+          dplyr::rename(c("Date" = "dt_date")) %>% dplyr::arrange(desc(Date))
         return(df_pieces)
       }
 
