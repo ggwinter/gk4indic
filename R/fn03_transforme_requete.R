@@ -162,7 +162,8 @@ fn03_transforme_requete <-
           values_to = "valeur"
         ) %>%
         dplyr::group_by(dt_trimestre, dt_date, nb_pieces,
-                        indic) %>% dplyr::summarise(valeur = sum(valeur))
+                        indic) %>%
+        dplyr::summarise(valeur = sum(valeur), .groups = "drop")
 
       fn_extrait_tab_pieces <- function(x = "lgt_mev",
                                         y = "nb_lgt_") {
