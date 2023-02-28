@@ -56,6 +56,14 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
   #
   fich_rd1_trim <- stringr::str_extract(nom_fich, "[:digit:]{4}t[:digit:]")
 
+  if(fich_rd1_trim != geokit_lasttrim) {
+    cat(cli::bg_red(
+      cli::col_black(
+        "ATTENTION les fichiers de geokit et le fichier rd1 ne sont pas de la meme date\n"
+      )
+    ))
+  }
+
   cat(cli::bg_green(cli::col_black(
     stringr::str_c(
       "Le fichier rd1 du trimestre ",

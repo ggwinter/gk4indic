@@ -2,6 +2,7 @@
 #'
 #' @param x ommercialisation par defaut
 #' @importFrom cli bg_green
+#' @importFrom cli bg_red
 #' @importFrom cli col_black
 #' @importFrom cli rule
 #' @importFrom didor convert
@@ -49,6 +50,14 @@ fn02_import_tab_dido <- function(x = "ommercialisation") {
     stringr::str_replace("-09-30", "t3") %>%
     stringr::str_replace("-06-30", "t2") %>%
     stringr::str_replace("-03-31", "t1") -> fich_dido_trim
+
+  if(fich_dido_trim != geokit_lasttrim) {
+    cat(cli::bg_red(
+      cli::col_black(
+        "ATTENTION les fichiers de geokit et de Dido ne sont pas de la meme date\n"
+      )
+    ))
+  }
 
   eff %>%
     didor::get_data() %>%
