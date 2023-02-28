@@ -65,7 +65,7 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
   if(fich_rd1_trim != geokit_lasttrim) {
     cat(cli::bg_red(
       cli::col_black(
-        "ATTENTION les fichiers de geokit et le fichier rd1 ne sont pas de la meme date\n"
+        "\n\nATTENTION les fichiers de geokit et le fichier rd1 ne sont pas de la meme date\n"
       )
     ))
   }
