@@ -1,6 +1,6 @@
 #' cree_vignette
 #'
-#' @param x lcharactere
+#' @param x charactere
 #'
 #' @return nothing
 #' @noRd

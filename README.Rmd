@@ -16,13 +16,21 @@ knitr::opts_chunk$set(
 # gk4indic
 
 <!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
 Test de création de package et d'utilisation de github
 
 L'outil indicateur ODD permet la visualisation cartographique de données à partir de tableaux csv mis en forme suivant un format spécifique.
 
-gk4indic transforme le résultat de la requête geokit "Indicateurs_ecln_trim2022" et du tableau, issu du site du SDES, rd1_commercialisation en plusieurs tableaux csv mis en forme qui seront téléchargés dans l'outil indicateur ODD pour mise a jour de ces valeurs.
+gk4indic transforme le résultat de la requête geokit "Indicateurs_ecln_trim2022" et du tableau, issu du site du SDES, rd1_commercialisation ou des tableaux issus de Dido, en plusieurs tableaux csv mis en forme qui seront téléchargés dans l'outil indicateur ODD pour mise a jour de ces valeurs.
+
+Depuis mai 2022, la publication trimestrielle sur la commercialisation des logements neufs aux particuliers est complétée par une nouvelle publication sur la commercialisation des logements neufs aux institutionnels (ventes en bloc). Ces ventes ne sont pas prises en compte dans l'outil indicateur.
+ 
+À compter de février 2023, les séries diffusées comprennent aussi des données corrigées des variations saisonnières et des jours ouvrables (CVS-CJO).
+Le mode de diffusion a aussi changé, les données sont desormais disponibles sur le service Dido. 
+
+Par ailleurs, les données sur la commercialisation des logements neufs auprès des particuliers incluent désormais les logements neufs rénovés et réhabilités, c’est-à-dire issus de la construction sur existant. En 2022, ces logements représentent 9 % du marché du logement neuf auprès des particuliers. Pour l'exportation des chiffres les deux types sont fusionnés.
 
 ## Installation
 

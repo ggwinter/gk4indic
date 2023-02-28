@@ -20,9 +20,16 @@ library(gk4indic)
 
 ## Objectifs du package
 
-L'outil indicateur ODD permet la visualisation cartographique de donnees à partir de tableaux csv mis en forme suivant un format spécifique.
+L'outil indicateur ODD permet la visualisation cartographique de données à partir de tableaux csv mis en forme suivant un format spécifique.
 
-gk4indic transforme le résultat de la requête geokit "Indicateurs_ecln_trim2022" et du tableau, issu du site du SDES, rd1_commercialisation en plusieurs tableaux csv mis en forme qui seront téléchargés dans l'outil indicateur ODD pour mise a jour de ces valeurs.
+gk4indic transforme le résultat de la requête geokit "Indicateurs_ecln_trim2022" et du tableau, issu du site du SDES, rd1_commercialisation ou des tableaux issus de Dido, en plusieurs tableaux csv mis en forme qui seront téléchargés dans l'outil indicateur ODD pour mise a jour de ces valeurs.
+
+Depuis mai 2022, la publication trimestrielle sur la commercialisation des logements neufs aux particuliers est complétée par une nouvelle publication sur la commercialisation des logements neufs aux institutionnels (ventes en bloc). Ces ventes ne sont pas prises en compte dans l'outil indicateur.
+ 
+À compter de février 2023, les séries diffusées comprennent aussi des données corrigées des variations saisonnières et des jours ouvrables (CVS-CJO).
+Le mode de diffusion a aussi changé, les données sont desormais disponibles sur le service Dido. 
+
+Par ailleurs, les données sur la commercialisation des logements neufs auprès des particuliers incluent désormais les logements neufs rénovés et réhabilités, c’est-à-dire issus de la construction sur existant. En 2022, ces logements représentent 9 % du marché du logement neuf auprès des particuliers. Pour l'exportation des chiffres les deux types sont fusionnés.
 
 ## Procédure
 
@@ -38,9 +45,10 @@ puis taper dans la console :
 
 remotes::install_github('ggwinter/gk4indic", build_vignettes = TRUE)
 
-installer le package COGugaison
+installer les package COGugaison et didor
 
-remotes::install_github('antuki/COGugaison", build_vignettes = TRUE)
+remotes::install_github("antuki/COGugaison", build_vignettes = TRUE)
+remotes::install_github("mtes-mct/didor", build_vignettes = TRUE)
 
 une fois que c'est fait redemmarer la session R ctrl+shift+f10
 
@@ -88,6 +96,9 @@ cocher la case en bas a droite dans package devant le nom gk4indic
 
 -   Modifier si besoin la date de la table de liaison epci/communes appuyer sur knitr en haut à gauche
 
+- Apres fevrier 2023 verifier que data_dido: TRUE
+- Avant février 2023 modifier en data_dido: FALSE
+
 #### Que va faire le script
 
 -   Il va faire apparaître une fenêtre de suivi du traitement
@@ -106,11 +117,15 @@ cocher la case en bas a droite dans package devant le nom gk4indic
 
 -   Coller le tableau excel dans 2_data sans changer son nom
 
-#### Recuperer le tableau du SDES
+#### Recuperer le tableau du SDES (avant février 2023)
 
 -   sur le site du SDES ou via Joseph fichier 2021t4\_\_rd1_commercialisation...
 
 -   le copier dans 2_data
+
+#### Après fevrier 2023, le tableau va etre recupere directement dans Dido
+
+-   Passer au point suivant
 
 #### Relancer le script
 
@@ -123,6 +138,19 @@ Le script va alors transformer les tableaux après avoir vérifié pour les comm
 Le message final : "Fin du traitement" va apparaître. Les tableaux sont dans 4_resultats", ce répertoire a été créé dans votre projet ex : ecln_indicateurs.
 
 5 tableaux csv ont ainsi été crées :
+Avant fev 2023 :
+
+-   ECLN_MEV_EPCI_AG_T\_2022-XX-XX.csv (nombre de mises en vente par EPCI)
+
+-   ECLN_mev_type_lgt_2022tXcsv (mise en vente par nombre de pieces)
+
+-   ECLN_PRIXM_REG_T\_2022tX_2022-XX-XX.csv (prix de vente moyen des appartements)
+
+-   ECLN_resv_type_lgt_2022tXcsv (réservations par nombre de pieces)
+
+-   ECLN_tab_rd1_202XtX_2022-XX-XX.csv (tous les autres indicateurs)
+
+Apres fevrier 2023
 
 -   ECLN_MEV_EPCI_AG_T\_2022-XX-XX.csv (nombre de mises en vente par EPCI)
 
@@ -142,7 +170,10 @@ C'est beaucoup plus simple
 
 -   Ouvrir le projet ecln_indicateurs
 
--   Coller les 2 tableaux excel, export de geokit et SDES, dans 2_data sans changer son nom (et donc remplacer eventuellement celui existant)
+-   avant fev 2023 : Coller les 2 tableaux excel, export de geokit et SDES, dans 2_data sans changer son nom (et donc remplacer eventuellement celui existant) OU
+
+-   apres fev 2023 : Coller uniquement le tableau excel, export de geokit, dans 2_data sans changer son nom (et donc remplacer eventuellement celui existant)
+
 
 -   Ouvrir le fichier toto.Rmd
 
@@ -162,6 +193,6 @@ C'est beaucoup plus simple
 
 ### Autres causes
 
--   Les packages tidyverse, here, attempt, rio, COGusaison doivent être installés sur le poste de travail, à vérifier dans la liste des packages. 
+-   Les packages tidyverse, here, attempt, rio, COGusaison, didor doivent être installés sur le poste de travail, à vérifier dans la liste des packages. 
 
 -   tout le reste : me contacter

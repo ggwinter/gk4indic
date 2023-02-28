@@ -12,6 +12,7 @@ Imports:
     attempt,
     cli,
     COGugaison,
+    didor,
     dplyr,
     here,
     janitor,
@@ -39,4 +40,4 @@ Encoding: UTF-8
 Language: fr
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3

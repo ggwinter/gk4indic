@@ -1,10 +1,11 @@
 ---
 title: "gk4indic_in_action"
 author: "G. Winterstein"
-date: "2021-11-30"
+date: "2023-02-28"
 output: html_document
 params:
   tab_epci: table_supracom_2020
+  donnees_dido: TRUE
 ---
 
 ```{r setup, include=FALSE}
@@ -16,7 +17,7 @@ library(gk4indic)
 
 4 etapes successives
 
-### Charger la table des intercommunalites
+### Creer les repertoires du projet (la premiere utilisation)
 
 ```{r repertoires, echo=FALSE}
 cree_repertoires()
@@ -44,11 +45,15 @@ fn06_table_epci()
 -   Seconde utilisation et suivantes deux messages doivent apparaitre : Les premiers fichiers..., Tous les tableaux sont dans 4 résultats.
 
 
-### Transformer le tableau du SDES rd1 commercialisation
+### Transformer le tableau du SDES rd1 commercialisation ou le tableau dido
 
 ```{r transforme_tabrd1, message=FALSE}
 
-gk4indic::fn02_import_tab_rd1()
+if(params$donnees_dido == TRUE) {
+  gk4indic::fn02_import_tab_dido()
+} else{
+  gk4indic::fn02_import_tab_rd1()
+}
 
 ```
 
