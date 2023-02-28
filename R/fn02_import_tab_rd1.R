@@ -23,6 +23,7 @@
 #' @importFrom purrr flatten_chr
 #' @importFrom purrr map_dfr
 #' @importFrom purrr set_names
+#' @importFrom readr read_csv2
 #' @importFrom readr write_csv2
 #' @importFrom readxl excel_sheets
 #' @importFrom readxl read_xls
@@ -55,6 +56,16 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
   # dernier trimestre du tableau
   #
   fich_rd1_trim <- stringr::str_extract(nom_fich, "[:digit:]{4}t[:digit:]")
+
+  geokit_lasttrim <- readr::read_csv2(here::here(
+                      "4_resultats",
+                      paste0(
+                        geokit_lasttrim,
+                        "_",
+                        Sys.Date(),
+                        ".csv"
+                      )
+                    ))
 
   if(fich_rd1_trim != geokit_lasttrim) {
     cat(cli::bg_red(

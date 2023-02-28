@@ -45,6 +45,17 @@ fn06_table_epci <- function(data = ls_onglets) {
     stringr::str_replace("-06-30", "t2") %>%
     stringr::str_replace("-03-31", "t1") -> geokit_lasttrim
 
+  readr::write_csv2(geokit_lasttrim,
+                    here::here(
+                      "4_resultats",
+                      paste0(
+                        geokit_lasttrim,
+                        "_",
+                        Sys.Date(),
+                        ".csv"
+                      )
+                    ))
+
   readr::write_csv2(ls_onglets$cor_epci,
                     here::here(
                       "4_resultats",

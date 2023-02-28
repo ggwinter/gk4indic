@@ -26,6 +26,7 @@
 #' @importFrom here here
 #' @importFrom janitor make_clean_names
 #' @importFrom readr write_csv2
+#' @importFrom readr read_csv2
 #' @importFrom stats complete.cases
 #' @importFrom stringr str_detect
 #' @importFrom stringr str_replace
@@ -50,6 +51,16 @@ fn02_import_tab_dido <- function(x = "ommercialisation") {
     stringr::str_replace("-09-30", "t3") %>%
     stringr::str_replace("-06-30", "t2") %>%
     stringr::str_replace("-03-31", "t1") -> fich_dido_trim
+
+  geokit_lasttrim <- readr::read_csv2(here::here(
+    "4_resultats",
+    paste0(
+      geokit_lasttrim,
+      "_",
+      Sys.Date(),
+      ".csv"
+    )
+  ))
 
   if(fich_dido_trim != geokit_lasttrim) {
     cat(cli::bg_red(
