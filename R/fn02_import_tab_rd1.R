@@ -57,15 +57,10 @@ fn02_import_tab_rd1 <- function(x = "2_data") {
   #
   fich_rd1_trim <- stringr::str_extract(nom_fich, "[:digit:]{4}t[:digit:]")
 
-  geokit_lasttrim <- readr::read_rds(here::here(
-                      "4_resultats",
-                      paste0(
-                        geokit_lasttrim,
-                        "_",
-                        Sys.Date(),
-                        ".rds"
-                      )
-                    ))
+  geokit_lasttrim <- readr::read_rds(here::here("4_resultats",
+                                                paste0("geokitlasttrim_",
+                                                       Sys.Date(),
+                                                       ".rds")))
 
   if(fich_rd1_trim != geokit_lasttrim) {
     cat(cli::bg_red(

@@ -49,8 +49,7 @@ fn06_table_epci <- function(data = ls_onglets) {
                     here::here(
                       "4_resultats",
                       paste0(
-                        geokit_lasttrim,
-                        "_",
+                        "geokitlasttrim_",
                         Sys.Date(),
                         ".rds"
                       )
