@@ -11,7 +11,7 @@
 #' @importFrom dplyr select
 #' @importFrom dplyr summarise
 #' @importFrom here here
-#' @importFrom readr write_csv2
+#' @importFrom readr write_rds
 #' @importFrom tibble as_tibble
 #' @importFrom tidyr pivot_wider
 #' @return nothing
@@ -45,14 +45,14 @@ fn06_table_epci <- function(data = ls_onglets) {
     stringr::str_replace("-06-30", "t2") %>%
     stringr::str_replace("-03-31", "t1") -> geokit_lasttrim
 
-  readr::write_csv2(geokit_lasttrim,
+  readr::write_rds(geokit_lasttrim,
                     here::here(
                       "4_resultats",
                       paste0(
                         geokit_lasttrim,
                         "_",
                         Sys.Date(),
-                        ".csv"
+                        ".rds"
                       )
                     ))
 

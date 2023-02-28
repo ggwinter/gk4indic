@@ -52,13 +52,13 @@ fn02_import_tab_dido <- function(x = "ommercialisation") {
     stringr::str_replace("-06-30", "t2") %>%
     stringr::str_replace("-03-31", "t1") -> fich_dido_trim
 
-  geokit_lasttrim <- readr::read_csv2(here::here(
+  geokit_lasttrim <- readr::read_rds(here::here(
     "4_resultats",
     paste0(
       geokit_lasttrim,
       "_",
       Sys.Date(),
-      ".csv"
+      ".rds"
     )
   ))
 
